@@ -1,0 +1,31 @@
+{
+  "name": "Flutter",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "forwardPorts": [5000],
+  "initializeCommand": "bash -c 'if [ ! -f .secret.env ]; then cp .env .secret.env; fi'",
+  "runArgs": ["--env-file", "${localWorkspaceFolder}/.secret.env"],
+  "mounts": [
+    "source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+  ],
+  "remoteUser": "vscode",
+  "postStartCommand": "flutter pub get",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "nguyenngoclong.asdf",
+        "dart-code.dart-code",
+        "dart-code.flutter",
+        "editorconfig.editorconfig",
+        "esbenp.prettier-vscode",
+        "redhat.vscode-xml",
+        "github.copilot",
+        "github.copilot-chat"
+      ],
+      "settings": {}
+    }
+  }
+}

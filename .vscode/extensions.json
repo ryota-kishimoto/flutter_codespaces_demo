@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "nguyenngoclong.asdf",
+    "dart-code.dart-code",
+    "dart-code.flutter",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "redhat.vscode-xml"
+  ],
+  "unwantedRecommendations": ["ms-azuretools.vscode-docker"]
+}

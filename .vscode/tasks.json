@@ -1,0 +1,41 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run flutter pub get",
+      "type": "shell",
+      "command": "flutter pub get",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run flutter doctor",
+      "type": "shell",
+      "command": "flutter doctor",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run flutter clean",
+      "type": "shell",
+      "command": "flutter clean",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Flutter Test",
+      "type": "shell",
+      "command": "flutter test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Flutter Web Server",
+      "type": "shell",
+      "command": "flutter run -d web-server --web-port=5000",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Flutter Build Apk",
+      "type": "shell",
+      "command": "flutter build apk",
+      "problemMatcher": []
+    }
+  ]
+}
