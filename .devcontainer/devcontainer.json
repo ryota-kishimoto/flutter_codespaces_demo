@@ -4,6 +4,10 @@
     "dockerfile": "Dockerfile",
     "context": ".."
   },
+  "hostRequirements": {
+    // "cpus": 8,
+    // "memory": "16gb"
+  },
   "forwardPorts": [5000],
   "initializeCommand": "bash -c 'if [ ! -f .secret.env ]; then cp .env .secret.env; fi'",
   "runArgs": ["--env-file", "${localWorkspaceFolder}/.secret.env"],
