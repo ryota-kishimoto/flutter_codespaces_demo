@@ -23,31 +23,17 @@ RUN sdkmanager --install "ndk;26.3.11579264"
 RUN chown -R vscode:vscode /usr/local/android-sdk
 #ENV ADB_SERVER_SOCKET=tcp:host.docker.internal:5037
 
-# asdf のインストール
-ENV HOME=/home/vscode
-ENV ASDF_DIR=$HOME/.asdf
-ENV PATH="$ASDF_DIR/bin:$ASDF_DIR/shims:$PATH:$HOME/.pub-cache/bin"
-RUN git clone https://github.com/asdf-vm/asdf.git --branch v0.14.0 $ASDF_DIR && chown -R vscode:vscode $ASDF_DIR
+# Flutter のインストール（main チャンネルを利用）
+RUN git clone https://github.com/flutter/flutter.git -b main /usr/local/flutter
+RUN chown -R vscode:vscode /usr/local/flutter
+ENV PATH="/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin:${PATH}"
 
-# .tool-versions をコンテナへコピー(ビルド時のバージョン指定用)
-COPY .tool-versions /workspace/.tool-versions
-WORKDIR /workspace
-
-# asdf 管理に Flutter プラグインを追加し、.tool-versions に基づいて Flutter をインストール
-RUN . $ASDF_DIR/asdf.sh && asdf plugin-add flutter https://github.com/oae/asdf-flutter.git
-RUN . $ASDF_DIR/asdf.sh && asdf install flutter
-RUN sudo chown -R vscode:vscode $ASDF_DIR
-RUN git config --global --add safe.directory $ASDF_DIR
-
-# Flutter のインストール確認
+# Flutter doctor を実行して確認
 USER vscode
 RUN flutter doctor
 
 # Flutter Web の有効化
 RUN flutter config --enable-web
-
-# VSCode の Flutter Extension 用に実際のPATHを通す
-ENV PATH="$ASDF_DIR/installs/flutter/$(grep flutter .tool-versions | cut -d ' ' -f 2)/bin:$PATH"
 
 # Dart パッケージのインストール
 #RUN dart pub global activate build_runner
